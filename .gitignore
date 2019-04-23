@@ -1,0 +1,6 @@
+*_test.php
+vendor/
+.exercism/
+README.md
+composer.*
+phpunit.xml
