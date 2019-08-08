@@ -2,11 +2,14 @@
 
 function prime($n)
 {
-    $num = 0;
-    $j = 2;
+    if ($n == 1) {
+        return 2;
+    }
+    $num = 1;
+    $j = 3;
     while ($num < $n) {
         $prime = true;
-        for ($k = 2; $k < $j; $k++) {
+        for ($k = 3; $k < $j; $k += 2) {
             if ($j % $k == 0) {
                 $prime = false;
                 break;
@@ -18,6 +21,6 @@ function prime($n)
                 return $j;
             }
         }
-        $j++;
+        $j += 2;
     }
 }
