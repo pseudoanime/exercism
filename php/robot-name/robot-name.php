@@ -7,20 +7,14 @@ class Robot
 
     public function getName()
     {
-        return $this->name ??  $this->name = $this->generateUniqueName();
+        return $this->name ?? $this->name = $this->generateUniqueName();
 
     }
 
     public function generateUniqueName()
     {
         $nameC = Name::getInstance();
-        while(true) {
-            $name = $this->randomAlphabet() . $this->randomAlphabet() . mt_rand(100, 999);
-            if (in_array($name, $nameC->getNames(), true) == false) {
-               $nameC->setName($name);
-                return $name;
-            }
-        }
+        return $nameC->generateUniqueName();
     }
 
     public function reset()
@@ -28,35 +22,47 @@ class Robot
         $this->name = null;
     }
 
-    public function randomAlphabet()
-    {
-        return chr(mt_rand(65,90));
-    }
-
 }
 
-class Name {
+class Name
+{
 
     private static $instance;
 
-    protected $names=[];
+    protected $names = [];
 
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-                $class = __CLASS__;
-                self::$instance = new $class();
-            }
+            $class = __CLASS__;
+            self::$instance = new $class();
+        }
         return self::$instance;
     }
 
-    public function getNames()
+    public function generateUniqueName()
+    {
+        while (true) {
+            $name = $this->randomAlphabet() . $this->randomAlphabet() . mt_rand(100, 999);
+            if (in_array($name, $this->getNames(), true) == false) {
+                $this->setName($name);
+                return $name;
+            }
+        }
+    }
+
+    protected function getNames()
     {
         return $this->names;
     }
 
-    public function setName($name)
+    protected function setName($name)
     {
         array_push($this->names, $name);
+    }
+
+    protected function randomAlphabet()
+    {
+        return chr(mt_rand(65, 90));
     }
 }
