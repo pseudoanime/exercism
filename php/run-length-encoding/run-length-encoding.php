@@ -1,10 +1,5 @@
 <?php
 
-//
-// This is only a SKELETON file for the "Run Length Encoding" exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
 function encode($input)
 {
     $letters = str_split($input);
